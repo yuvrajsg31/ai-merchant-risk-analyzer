@@ -26,7 +26,7 @@ from reportlab.platypus import (
 # =========================================================
 
 st.set_page_config(
-    page_title="AI Merchant Risk Analyzer",
+    page_title="MerchShield AI",
     layout="wide"
 )
 
@@ -38,36 +38,6 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.block-container {
-    max-width: 1400px;
-    padding-top: 1.5rem;
-    padding-bottom: 3rem;
-}
-
-/* HERO */
-
-.hero-section {
-    background: linear-gradient(135deg, #172033 0%, #26364D 100%);
-    padding: 35px 45px;
-    border-radius: 18px;
-    margin-bottom: 35px;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
-}
-
-.hero-title {
-    text-align: center;
-    font-size: 34px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 8px;
-}
-
-.hero-subtitle {
- text-align: center;
-    font-size: 16px;
-    color: #CBD5E1;
-    line-height: 1.6;
-}
 
 
 /* SECTION HEADINGS */
@@ -1294,16 +1264,36 @@ def create_risk_factor_chart(
 # IMPORTANT: HTML STARTS AT COLUMN 1
 # =========================================================
 
-st.markdown(
-"""<div class="hero-section">
-<div class="hero-title"> AI Merchant Risk Analyzer</div>
-<div class="hero-subtitle">
-AI-powered compliance and merchant risk decision support<br>
-for structured onboarding assessments.
-</div>
-</div>""",
-unsafe_allow_html=True
-)
+from pathlib import Path
+from PIL import Image
+
+# =====================================================
+# HERO BANNER
+# =====================================================
+
+image_path = Path(__file__).parent / "hero_banner.png"
+
+if image_path.exists():
+
+    image = Image.open(image_path)
+
+    # Crop a little from top and bottom
+    width, height = image.size
+
+    crop_top = int(height * 0.15)
+    crop_bottom = int(height * 0.85)
+
+    image = image.crop(
+        (0, crop_top, width, crop_bottom)
+    )
+
+    st.image(
+        image,
+        use_container_width=True
+    )
+
+else:
+    st.error("Hero banner image not found.")
 
 
 # =========================================================
@@ -1715,7 +1705,7 @@ if (
     # =====================================================
 
     st.markdown(
-        '<div class="section-heading">📁 Assessment Case Details</div>',
+        '<div class="section-heading"> Assessment Case Details</div>',
         unsafe_allow_html=True
     )
 
@@ -1794,7 +1784,7 @@ if (
     # =====================================================
 
     st.markdown(
-        '<div class="section-heading">📊 Risk Assessment Dashboard</div>',
+        '<div class="section-heading">Risk Assessment Dashboard</div>',
         unsafe_allow_html=True
     )
 
@@ -1881,7 +1871,7 @@ if (
     # =====================================================
 
     st.markdown(
-        "### 📋 Merchant Data Completeness"
+        "###  Merchant Data Completeness"
     )
 
     st.progress(
@@ -1935,7 +1925,7 @@ if (
     with chart2:
 
         st.markdown(
-            "### 📊 Risk Dimension Breakdown"
+            "### Risk Dimension Breakdown"
         )
 
         st.plotly_chart(
@@ -2007,7 +1997,7 @@ if (
     # =====================================================
 
     st.markdown(
-        '<div class="section-heading">🧠 Detailed AI Assessment</div>',
+        '<div class="section-heading"> Detailed AI Assessment</div>',
         unsafe_allow_html=True
     )
 
@@ -2034,7 +2024,7 @@ if (
 
 
     st.markdown(
-        "### 🔎 Risk Explanation"
+        "###  Risk Explanation"
     )
 
     st.info(
@@ -2043,7 +2033,7 @@ if (
 
 
     st.markdown(
-        "### 🎯 Recommended Compliance Action"
+        "###  Recommended Compliance Action"
     )
 
     st.success(
