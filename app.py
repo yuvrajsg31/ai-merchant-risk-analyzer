@@ -1496,7 +1496,7 @@ Important:
 """
 
         with st.spinner(
-            "Gemini AI is analyzing merchant information..."
+            "MerchShield AI is analyzing merchant information..."
         ):
 
             try:
